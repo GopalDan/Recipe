@@ -37,10 +37,9 @@ public final class QueryUtils {
 
 
     /**
-     * Query TMDb database and return a single  {@link Recipe} .
+     * Query the web service and return a single  {@link Recipe} .
      */
     public static Recipe fetchRecipe(String requestUrl, int selectedId) {
-        Log.e(LOG_TAG, "Fetching is called: ");
       /*  try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -58,10 +57,10 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of movie
+        // Extract relevant fields from the JSON response and create a recipe
         Recipe recipe = extractFeatureFromJson(jsonResponse, selectedId);
 
-        // Return the movie list
+        // Return the recipe
         return recipe;
     }
 

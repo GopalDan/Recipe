@@ -2,6 +2,8 @@ package com.example.gopal.f_bakingapp.ui;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,11 +22,13 @@ import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsFragment.OnStepClickListener{
     boolean mTwoPane = false;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        context = getApplicationContext();
         // In case of two pane initially we don't need to show dynamically created item that's why nothing
         // and for static fragment it inflates automatically
         if(findViewById(R.id.two_pane_layout)!=null){
@@ -52,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
 
     }
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -63,8 +67,12 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_recipe_ingredient:
-                AddWidgetService.addRecipeIngredientWidget(this);break;
+               // AddWidgetService.addRecipeIngredientWidget(this);break;
+                Intent intent = new Intent(context, RecipeWidgetProvider.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                intent.putExtra("recipe","Brownie");
+                context.sendBroadcast(intent);
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

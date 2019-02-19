@@ -2,7 +2,9 @@ package com.example.gopal.f_bakingapp.ui;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.example.gopal.f_bakingapp.AddWidgetService;
@@ -29,7 +31,10 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
 
-      AddWidgetService.addRecipeIngredientWidget(context);
+      //AddWidgetService.addRecipeIngredientWidget(context);
+//        for (int appWidgetId : appWidgetIds) {
+//            updateAppWidget(context, appWidgetManager, appWidgetId, recipeIngredient);
+//        }
 
     }
     public static void addRecipeIngredientWidgets(Context context, AppWidgetManager appWidgetManager,
@@ -49,5 +54,17 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            String loadedRecipe = intent.getStringExtra("recipe");
+            AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+            ComponentName cn = new ComponentName(context, RecipeWidgetProvider.class);
+            mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.recipe_ingredients);
+           // this.onUpdate(context,mgr,mgr.getAppWidgetIds(cn));
+            addRecipeIngredientWidgets(context,mgr,mgr.getAppWidgetIds(cn),loadedRecipe);
+        }
+    }
 }
 

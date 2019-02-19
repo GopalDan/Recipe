@@ -23,7 +23,6 @@ public class Recipe {
     private String name;
     private List<List<String>> ingredients;
     private List<List<String>> steps;
-    private static final String JSON_FILE = "F:\\AndroidStudioProjects\\AdvAndApps\\6 - MediaPlaybacks\\Bakingapp\\app\\src\\main\\assets\\recipe.txt";
 
     public Recipe(int id, String name, List<List<String>> ingredients, List<List<String>> steps) {
         this.id = id;
@@ -31,13 +30,30 @@ public class Recipe {
         this.ingredients = ingredients;
         this.steps = steps;
     }
+    public int getId() {
+        return id;
+    }
 
-    /**
+    public String getName() {
+        return name;
+    }
+
+    public List<List<String>> getIngredients() {
+        return ingredients;
+    }
+
+    public List<List<String>> getSteps() {
+        return steps;
+    }
+
+   /*
+    * In case of JsonReader
+     * *//**
      * Gets a single recipe by its ID.
      * @param context The application context.
      * @param recipeID The sample ID.
      * @return The single recipe object
-     */
+     *//*
     static Recipe getRecipeByID(Context context, int recipeID) {
         JsonReader reader;
         try {
@@ -58,11 +74,11 @@ public class Recipe {
         return null;
     }
 
-    /**
+    *//**
      * Method used for obtaining a single reipe from the JSON file.
      * @param reader The JSON reader object pointing a single sample JSON object.
      * @return The Recipe the JsonReader is pointing to.
-     */
+     *//*
     private static Recipe readRecipe(JsonReader reader) {
         int id = -1;
         String name = null;
@@ -181,18 +197,18 @@ public class Recipe {
         return singleInstruction;
     }
 
-    /**
+    *//**
      * Method for creating a JsonReader object that points to the JSON array of recipes.
      * @param context The application context.
      * @return The JsonReader object pointing to the JSON array of recipes.
      * @throws IOException Exception thrown if the sample file can't be found.
-     */
+     *//*
     private static JsonReader readJSONFile(Context context) throws IOException {
         InputStream is = new FileInputStream(JSON_FILE);
         JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 
         return reader;
-       /*
+       *//*
        AssetManager assetManager = context.getAssets();
         String uri = null;
 
@@ -218,23 +234,8 @@ public class Recipe {
         } finally {
             Util.closeQuietly(dataSource);
         }
-        */
+        *//*
 
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<List<String>> getIngredients() {
-        return ingredients;
-    }
-
-    public List<List<String>> getSteps() {
-        return steps;
-    }
+*/
 }

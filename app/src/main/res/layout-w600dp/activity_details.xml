@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/two_pane_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <fragment
         android:id="@+id/details_fragment_container"
+        android:name="com.example.gopal.f_bakingapp.fragment.DetailsFragment"
         android:layout_width="350dp"
-        android:layout_height="match_parent"
-        android:name="com.example.gopal.f_bakingapp.fragment.DetailsFragment">
+        android:layout_height="match_parent">
 
     </fragment>
+
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary" />
 
     <FrameLayout
         android:id="@+id/instruction_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

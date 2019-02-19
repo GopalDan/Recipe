@@ -5,17 +5,19 @@
     android:id="@+id/two_pane_instruction_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/video_player"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp" />
+
     <TextView
         android:id="@+id/step_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/video_player"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:textColor="#455a64"/>
+        android:textColor="#455a64"
+        android:textSize="16sp" />
 </RelativeLayout>

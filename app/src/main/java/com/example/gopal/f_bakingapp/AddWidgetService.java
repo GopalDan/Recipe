@@ -33,7 +33,6 @@ public class AddWidgetService extends IntentService{
             if (ACTION_ADD_WIDGET.equals(action)){
                 addWidget();
             }
-
         }
     }
 

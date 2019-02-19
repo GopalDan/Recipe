@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gopal.f_bakingapp.R;
@@ -34,21 +35,22 @@ public class InstructionFragment extends Fragment {
     private SimpleExoPlayerView mPlayerView;
     private List<Step> instructions;
     private int position;
-    private Button mNextStepButton;
-    private Button mPrevStepButton;
+    private ImageView mNextStepButton;
+    private ImageView mPrevStepButton;
     private TextView mInfo;
     private int mTotalStep;
     boolean wasPlaying = false;
     boolean mTwoPane = false;
 
     // default constructor
-    public InstructionFragment() {}
+    public InstructionFragment() {
+    }
 
     // parametrized constructor
     public static InstructionFragment newInstance(List<Step> steps, int position) {
         InstructionFragment fragment = new InstructionFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("list",(Serializable) steps);
+        bundle.putSerializable("list", (Serializable) steps);
         bundle.putInt("pos", position);
         fragment.setArguments(bundle);
         return fragment;
@@ -56,24 +58,23 @@ public class InstructionFragment extends Fragment {
 
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
-            instructions = (List<Step>)getArguments().getSerializable("list");
+            instructions = (List<Step>) getArguments().getSerializable("list");
             position = getArguments().getInt("pos");
         }
     }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_instruction, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_instruction, container, false);
 
         mInfo = rootView.findViewById(R.id.step_info);
         mPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.video_player);
 
         // fragment for two pane
-        if(rootView.findViewById(R.id.two_pane_instruction_layout)!=null){
+        if (rootView.findViewById(R.id.two_pane_instruction_layout) != null) {
             mTwoPane = true;
             readBundle(getArguments());
             // play video & show instruction
@@ -118,27 +119,28 @@ public class InstructionFragment extends Fragment {
         return rootView;
     }
 
-    public void showCurrentStep(int position){
+    public void showCurrentStep(int position) {
         Step currentStep = instructions.get(position);
         String stepNumber = currentStep.getStepNumber();
         String description = currentStep.getStepDescription();
         String videoUrl = currentStep.getStepVideoUrl();
 
         // it doesn't need in case of single pane
-        if(!mTwoPane)getActivity().setTitle("Step " + stepNumber);
+        if (!mTwoPane) getActivity().setTitle("Step " + stepNumber);
         mInfo.setText(description);
 
         // if currently video is playing then release it before initialising the others
-        if( wasPlaying ) {
+        if (wasPlaying) {
             wasPlaying = false;
-            releasePlayer();}
+            releasePlayer();
+        }
 
         // Initialize the player.
-        if(!TextUtils.isEmpty(videoUrl)){
+        if (!TextUtils.isEmpty(videoUrl)) {
             mPlayerView.setVisibility(View.VISIBLE);
             wasPlaying = true;
-            initializePlayer(Uri.parse(videoUrl));}
-        else{
+            initializePlayer(Uri.parse(videoUrl));
+        } else {
             mPlayerView.setVisibility(View.GONE);
         }
 
@@ -146,6 +148,7 @@ public class InstructionFragment extends Fragment {
 
     /**
      * Initialize ExoPlayer.
+     *
      * @param mediaUri The URI of the sample to play.
      */
     private void initializePlayer(Uri mediaUri) {
@@ -163,6 +166,7 @@ public class InstructionFragment extends Fragment {
             mExoPlayer.setPlayWhenReady(true);
         }
     }
+
     /**
      * Release ExoPlayer.
      */
@@ -175,6 +179,6 @@ public class InstructionFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        releasePlayer();
+        if (wasPlaying) releasePlayer();
     }
 }
