@@ -17,8 +17,7 @@ This is a  Baking App  that allows a user to select a recipe and see video-guide
  
  
  # InstructionActivity:-
- You can watch video as well as see instruction of a particular step in details. You can click right or left arrow in order to move next or
- back from current step.
+ You can watch video as well as see instruction of a particular step in details. You can click right or left arrow in order to move next     or back from current step.
  
  ![R 3](https://user-images.githubusercontent.com/37050086/57182505-5b3b5480-6ebd-11e9-9be1-b26604c0f686.jpg)
  
